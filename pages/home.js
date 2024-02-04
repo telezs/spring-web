@@ -4,7 +4,7 @@ import Nav from "../components/nav.js";
 export default class Home {
   constructor() {
     // Change title
-    document.getElementsByTagName("title")[0].innerText = "Home";
+    document.getElementsByTagName("title")[0].innerText = "The Heritage";
   }
   initRender(container) {
     // add nav in page
