@@ -1,4 +1,4 @@
-import Login from "./pages/login/login.js";
+import Home from "./pages/home.js";
 
 class App {
   activeScreen;
@@ -19,13 +19,12 @@ class App {
     this.activeScreen.initRender(this.container);
   }
 }
-const container = document.getElementById("app");
+const container = document.getElementsByTagName("body")[0];
 const app = new App(container);
 
-// check file to load html code
   // todo
-  const login = new Login();
-  app.changeActiveScreen(login);
+  const home = new Checkout();
+  app.changeActiveScreen(home);
 
 //export instant của app chứ ko export class vì App là duy nhất
 export default app;
@@ -35,6 +34,9 @@ export default app;
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-lite.js";
+import Login from "./pages/login.js";
+import Signup from "./pages/signup.js";
+import Checkout from "./pages/checkout.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
