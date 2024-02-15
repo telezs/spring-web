@@ -13,10 +13,11 @@ export default class Home {
       nav.initRender(container);
     }
 
-    const a = document.createElement("div");
-    a.innerHTML = "dsajjsdakjgh";
+    // home page 
 
-    container.appendChild(a);
+    
+
+ 
 
     // add footer in page
     if (!document.getElementsByTagName("footer").length) {

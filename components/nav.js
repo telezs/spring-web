@@ -1,5 +1,5 @@
-import app from "../app";
-import Login from "../pages/login";
+import app from "../app.js";
+import Login from "../pages/login.js";
 
 export default class Nav {
   constructor() {}

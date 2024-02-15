@@ -23,8 +23,8 @@ const container = document.getElementsByTagName("body")[0];
 const app = new App(container);
 
 // todo
-const login = new Home();
-app.changeActiveScreen(login);
+const home = new Home();
+app.changeActiveScreen(home);
 
 //export instant của app chứ ko export class vì App là duy nhất
 export default app;
@@ -34,7 +34,6 @@ export default app;
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-lite.js";
-import Nav from "./components/nav.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
