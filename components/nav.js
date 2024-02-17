@@ -99,9 +99,16 @@ export default class Nav {
 
   // goto other pages by links
   gotoHome() {
-    const Home = new Home();
+    const home = new Home();
     app.changeActiveScreen(home);
   }
-  gotoGallery() {}
-  gotoCreate() {}
+  gotoGallery() {
+    const gallery = new Gallery();
+    app.changeActiveScreen(gallery);
+  }
+  gotoCreate() {
+    const create = new Create();
+    app.changeActiveScreen(create);
+
+  }
 }
