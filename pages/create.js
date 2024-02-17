@@ -1,6 +1,7 @@
 import app from "../app.js";
 import Footer from "../components/footer.js";
 import Nav from "../components/nav.js";
+import form from "../components/create_form.js";
 
 export default class Create {
   constructor() {
@@ -12,6 +13,7 @@ export default class Create {
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- icon branding -->
@@ -43,18 +45,13 @@ export default class Create {
     const card_body = document.createElement("div");
     card_body.classList.add("card-body");
 
-    const form = document.createElement("form")
-
-    const form_size = document.createElement("div");
-    form_size.id = "form-size";
-
-    const label_username = document.createElement("label");
-    label_username.setAttribute("for", "form-size");
-    label_username.innerText = "Choose your size";
-    label_username.classList.add("form-label");
-
-    
-
+    const container_fluid = document.createElement("div");
+    container_fluid.id = "form-create";
+    // add carousel object in div
+    const form = new form();
+    carousel.initRender(container_fluid);
+    // add carousel in container
+    container.appendChild(container_fluid);
 
     // add footer in page
     if (!document.getElementsByTagName("footer").length) {

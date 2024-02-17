@@ -24,7 +24,6 @@ export default class Nav {
     const link = document.createElement("a");
     link.classList.add("navbar-brand");
     link.classList.add("justify-content-center");
-    link.addEventListener("click", this.gotoHome);
 
     const logo_img = `<img
     src="assets/img/The Heritage.png"
