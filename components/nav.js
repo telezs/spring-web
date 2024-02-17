@@ -1,4 +1,7 @@
 import app from "../app.js";
+import Create from "../pages/create.js";
+import Gallery from "../pages/gallery.js";
+import Home from "../pages/home.js";
 import Login from "../pages/login.js";
 
 export default class Nav {
@@ -17,7 +20,7 @@ export default class Nav {
     const link = document.createElement("a");
     link.classList.add("navbar-brand");
     link.classList.add("justify-content-center");
-    link.addEventListener("click", this.gotoHome.bind(this));
+    link.addEventListener("click", this.gotoHome);
 
     const logo_img = `<img
     src="assets/img/The Heritage.png"
@@ -53,7 +56,7 @@ export default class Nav {
     link_home.classList.add("nav-link");
     link_home.innerText = "Home";
     link_home.href = "#";
-    link_home.addEventListener("click", this.gotoHome.bind(this));
+    link_home.addEventListener("click", this.gotoHome);
 
     const link_gallery = document.createElement("a");
     link_gallery.classList.add("nav-link");
@@ -65,7 +68,7 @@ export default class Nav {
     link_create.classList.add("nav-link");
     link_create.innerText = "Create";
     link_create.href = "#";
-    link_create.addEventListener("click", this.gotoCreate.bind(this));
+    link_create.addEventListener("click", this.gotoCreate);
 
     links_div.appendChild(link_home);
     links_div.appendChild(link_gallery);
@@ -80,7 +83,7 @@ export default class Nav {
     login_btn.classList.add("btn-outline-primary");
     login_btn.id = "login-button";
     login_btn.innerText = "login";
-    login_btn.addEventListener("click", this.gotoLogin.bind(this));
+    login_btn.addEventListener("click", this.gotoLogin);
 
     container_div.appendChild(login_btn);
 
@@ -90,7 +93,15 @@ export default class Nav {
     container.appendChild(nav_tag);
   }
 
-  checkLogin() {}
+  checkLogin() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const login_btn = document.querySelector("login-button");
+    if (currentUser) {
+      login_btn.innerText = "Logout";
+    } else {
+      login_btn.innerText = "Login";
+    }
+  }
 
   gotoLogin() {
     const login = new Login();
@@ -109,6 +120,5 @@ export default class Nav {
   gotoCreate() {
     const create = new Create();
     app.changeActiveScreen(create);
-
   }
 }

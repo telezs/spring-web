@@ -201,12 +201,6 @@ export default class Home {
       const footer = new Footer();
       footer.initRender(container);
     }
-
-    // add js file 
-    container.innerHTML += `<script
-    src="https://kit.fontawesome.com/53a615003b.js"
-    crossorigin="anonymous"
-  ></script>`
   }
 
   // goto other pages
