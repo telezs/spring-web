@@ -1,6 +1,10 @@
-import app from "../app.js";
+import app, { firebaseApp } from "../app.js";
+import Home from "./home.js";
 import Signup from "./signup.js";
-
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 export default class Login {
   constructor() {
     // add link for header
@@ -120,10 +124,32 @@ export default class Login {
     container_login.appendChild(row);
     container.appendChild(container_login);
   }
-  login() {
-        //validate form
-
-    // signup by firebase
+  login(e) {
+    e.preventDefault();
+    // get data from input form
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    //validate form
+    if (!email || !password) {
+      alert("You need to fill this form");
+    } else {
+      //auth by firebase
+      const auth = getAuth(firebaseApp);
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          localStorage.setItem("currentUser", JSON.stringify(user));
+          alert("Success");
+          //gotohome
+          const login = new Home();
+          app.changeActiveScreen(login);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          alert(errorMessage);
+        });
+    }
   }
 
   gotoSignup() {

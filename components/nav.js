@@ -3,6 +3,10 @@ import Create from "../pages/create.js";
 import Gallery from "../pages/gallery.js";
 import Home from "../pages/home.js";
 import Login from "../pages/login.js";
+import {
+  getAuth,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 
 export default class Nav {
   constructor() {}
@@ -83,7 +87,7 @@ export default class Nav {
     login_btn.classList.add("btn-outline-primary");
     login_btn.id = "login-button";
     login_btn.innerText = "login";
-    login_btn.addEventListener("click", this.gotoLogin);
+    // login_btn.addEventListener("click", this.checkLogin);
 
     container_div.appendChild(login_btn);
 
@@ -91,23 +95,44 @@ export default class Nav {
 
     // add nav in container (div app)
     container.appendChild(nav_tag);
+    this.checkLogin();
   }
 
   checkLogin() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    const login_btn = document.querySelector("login-button");
+    const login_btn = document.querySelector("#login-button");
+
     if (currentUser) {
       login_btn.innerText = "Logout";
+      login_btn.addEventListener("click", this.logout);
     } else {
       login_btn.innerText = "Login";
+      login_btn.addEventListener("click", this.gotoLogin);
     }
   }
 
+  logout() {
+    // xoa storage
+    localStorage.clear();
+    // firebase logout
+    const auth = getAuth(firebaseApp);
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        // goto home
+        const home = new Home();
+        app.changeActiveScreen(home);
+      })
+      .catch((error) => {
+        // An error happened.
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  }
   gotoLogin() {
     const login = new Login();
     app.changeActiveScreen(login);
   }
-
   // goto other pages by links
   gotoHome() {
     const home = new Home();

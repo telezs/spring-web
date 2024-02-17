@@ -1,6 +1,13 @@
-import app from "../app.js";
+import app, { firebaseApp, firestore } from "../app.js";
 import Login from "./login.js";
-
+import {
+  set,
+  ref,
+} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 export default class Signup {
   constructor() {
     document.getElementsByTagName("head")[0].innerHTML = `<meta charset="UTF-8">
@@ -77,7 +84,7 @@ export default class Signup {
     form_outline1.appendChild(label_username);
     form_floating1.appendChild(form_outline1);
     card_body.appendChild(form_floating1);
-    
+
     // email input
     const form_floating = document.createElement("div");
     form_floating.classList.add("form-floating");
@@ -141,7 +148,7 @@ export default class Signup {
     // signup link
     const signup_link = document.createElement("a");
     signup_link.classList.add("signup-href");
-    signup_link.innerText = "Create account here";
+    signup_link.innerText = "Login here";
     signup_link.addEventListener("click", this.gotoLogin.bind(this));
 
     card_body.appendChild(signup_link);
@@ -154,10 +161,39 @@ export default class Signup {
     container.appendChild(container_login);
   }
 
-  signup() {
-    //validate form
+  signup(e) {
+    e.preventDefault();
+    // get data from input (login form)
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+    // validate form
+    if (!email || !password || !username) {
+      alert("You need to fill this form");
+    } else {
+      // create account on Firebase
+      const auth = getAuth(firebaseApp);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
 
-    // signup by firebase
+          set(ref(firestore, "users/" + user.uid), {
+            displayName: username,
+            email: email,
+          });
+
+          localStorage.setItem("currentUser", JSON.stringify(user));
+          alert("Success");
+          //gotohome
+          const login = new Home();
+          app.changeActiveScreen(login);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          alert(errorMessage);
+        });
+    }
   }
   gotoLogin() {
     const login = new Login();

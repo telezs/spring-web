@@ -90,9 +90,10 @@ export default class Home {
     const card_btn = document.createElement("a");
     card_btn.classList.add("btn");
     card_btn.classList.add("btn-card");
+    card_btn.id = "card_btn";
     card_btn.href = "#";
-    card_btn.innerText = "learn more";
-    card_btn.addEventListener("click", this.gotoLogin.bind(this));
+    // card_btn.innerText = "learn more";
+    card_btn.addEventListener("click", this.checkLogin);
 
     card_details.appendChild(card_title);
     card_details.appendChild(card_text);
@@ -172,7 +173,7 @@ export default class Home {
     card_btn_3.classList.add("btn-card");
     card_btn_3.href = "#";
     card_btn_3.innerText = "start designing";
-    card_btn_3.addEventListener("click", this.gotoLogin.bind(this));
+    card_btn_3.addEventListener("click", this.gotoCreate);
 
     card_details_3.appendChild(card_title_3);
     card_details_3.appendChild(card_text_3);
@@ -201,9 +202,23 @@ export default class Home {
       const footer = new Footer();
       footer.initRender(container);
     }
+
+    this.checkLogin();
   }
 
   // goto other pages
+  checkLogin() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const login_btn = document.querySelector("#card_btn");
+
+    if (currentUser) {
+      login_btn.innerText = "You signed in";
+    } else {
+      login_btn.innerText = "Login";
+      login_btn.addEventListener("click", this.gotoLogin);
+    }
+  }
+
   gotoLogin() {
     const login = new Login();
     app.changeActiveScreen(login);
