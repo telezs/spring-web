@@ -8,33 +8,8 @@ import Create from "./create.js";
 
 export default class Home {
   constructor() {
-    // add link for header
-    document.getElementsByTagName(
-      "head"
-    )[0].innerHTML = ` <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App</title>
-    <!-- cdn for plugins and extensions -->
-    <script
-      type="text/javascript"
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- css -->
-    <link rel="stylesheet" href="./assets/css/stylesheet.css" />
-
-    <!-- icon branding -->
-    <link rel="shortcut icon" href="pictures/Untitled2.png" />`;
+    // add name for title
+    document.getElementsByTagName("title")[0].innerHTML = "App";
   }
   initRender(container) {
     // add nav in page

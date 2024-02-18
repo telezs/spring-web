@@ -1,24 +1,19 @@
 import app from "../app.js";
 import Nav from "../components/nav.js";
 import Home from "./home.js";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-lite.js";
 
 export default class Checkout {
   constructor() {
-    document.getElementsByTagName(
-      "head"
-    )[0].innerHTML = `<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <!-- cdn for plugins and extensions -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- icon branding -->
-  <link rel="shortcut icon" href="pictures/Untitled2.png">
-  <link rel="stylesheet" href="./assets/css/stylesheet.css" />
-`;
+    // add name for title
+    document.getElementsByTagName("title")[0].innerHTML = "Checkout";
+    //get local order
+    this.$order = JSON.parse(localStorage.getItem("order"));
   }
 
   async initRender(container) {
@@ -52,7 +47,7 @@ export default class Checkout {
     ul.classList.add("mb-3");
 
     // call function to get items
-    await this.getItems();
+    this.getItems();
 
     this.$itemsOrder.forEach((element) => {
       const li = document.createElement("li");
@@ -93,6 +88,7 @@ export default class Checkout {
     li.appendChild(item_title);
 
     const item_price = document.createElement("strong");
+    item_price.id = "total";
     item_price.innerText =
       "$" + this.$itemsOrder.reduce((sum, a) => sum + a.price, 0);
     li.appendChild(item_price);
@@ -378,7 +374,7 @@ export default class Checkout {
     submit_btn.classList.add("btn-block");
     submit_btn.type = "submit";
     submit_btn.innerText = "Checkout";
-    submit_btn.addEventListener("click", this.order.bind(this));
+    submit_btn.addEventListener("click", await this.order.bind(this));
     checkout_form.appendChild(submit_btn);
 
     col2.appendChild(checkout_form);
@@ -388,15 +384,14 @@ export default class Checkout {
     container.appendChild(container_checkout);
   }
 
-  async getItems() {
+  getItems() {
     let list = [
-      { name: "Product name", des: "Brief description", price: 11 },
-      { name: "Product name", des: "Brief description", price: 14 },
-      { name: "Product name", des: "Brief description", price: 20 },
+      { name: "Ao dai", des: "clothing", price: 110 },
+      { name: "Design", des: "your design", price: this.$order.total },
     ];
 
     // get list from local storage
-    this.$itemsOrder = await list;
+    this.$itemsOrder = list;
   }
 
   gotoHome() {
@@ -404,10 +399,21 @@ export default class Checkout {
     app.changeActiveScreen(home);
   }
 
-  order() {
+  async order(e) {
+    e.preventDefault();
     //validate form
     //create order on firestore
+    const total = this.$itemsOrder.reduce((sum, a) => sum + a.price, 0);
+    await addDoc(collection(firestore, "order"), {
+      shipping: 5,
+      total: total,
+      created_at: this.$order.created_at,
+      created_by: this.$order.created_by,
+    });
+    // clear the storage
+    localStorage.removeItem("order");
+    //back home
+    const home = new Home();
+    app.changeActiveScreen(home);
   }
-
-  getPaymentMethod() {}
 }

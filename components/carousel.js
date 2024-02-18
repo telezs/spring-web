@@ -1,38 +1,34 @@
 export default class Carousel {
-  constructor() {}
+  constructor() {
+    document.getElementsByTagName(
+      "head"
+    )[0].innerHTML += `<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+`;
+  }
 
   initRender(container) {
-    const carousel = `    <div id="carouselExample" class="carousel slide">
+    const carousel = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="assets/img/anh4-1702630292.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <img src="assets/img/fig-caption.png" alt="" style="width: 80vw; margin-bottom: 10rem;">
-        </div>
+        <img class="d-block w-100" src="assets/img/anh4-1702630292.jpg" alt="First slide">
       </div>
       <div class="carousel-item">
-        <img src="assets/img/ao-dai-museum-5.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <img src="assets/img/fig-caption.png" alt="" style="width: 80vw; margin-bottom: 10rem;">
-        </div>
+        <img class="d-block w-100" src="assets/img/ao-dai-museum-5.jpg" alt="Second slide">
       </div>
       <div class="carousel-item">
-        <img src="assets/img/ao-dai-museum-2.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <img src="assets/img/fig-caption.png" alt="" style="width: 80vw; margin-bottom: 10rem;">
-        </div>
+        <img class="d-block w-100" src="assets/img/ao-dai-museum-2.jpg" alt="Third slide">
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+      <span class="sr-only">Next</span>
+    </a>
   </div>`;
-
-  container.innerHTML += carousel;
+    container.innerHTML += carousel;
   }
 }
