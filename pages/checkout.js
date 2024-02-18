@@ -1,11 +1,12 @@
 import app from "../app.js";
+import Nav from "../components/nav.js";
 import Home from "./home.js";
 
 export default class Checkout {
   constructor() {
     document.getElementsByTagName(
       "head"
-    )[0].innerHTML = ` <meta charset="UTF-8">
+    )[0].innerHTML = `<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <!-- cdn for plugins and extensions -->
@@ -16,10 +17,17 @@ export default class Checkout {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- icon branding -->
   <link rel="shortcut icon" href="pictures/Untitled2.png">
+  <link rel="stylesheet" href="./assets/css/stylesheet.css" />
 `;
   }
 
   async initRender(container) {
+    // add nav in page
+    if (!document.getElementsByTagName("nav").length) {
+      const nav = new Nav();
+      nav.initRender(container);
+    }
+
     let container_checkout = document.createElement("div");
     container_checkout.classList.add("container");
     container_checkout.id = "checkout";
@@ -45,8 +53,6 @@ export default class Checkout {
 
     // call function to get items
     await this.getItems();
-
-    console.log(this.$itemsOrder);
 
     this.$itemsOrder.forEach((element) => {
       const li = document.createElement("li");
@@ -384,9 +390,9 @@ export default class Checkout {
 
   async getItems() {
     let list = [
-      { name: "Product name", des: "Brief description", price: 12 },
-      { name: "Product name", des: "Brief description", price: 12 },
-      { name: "Product name", des: "Brief description", price: 12 },
+      { name: "Product name", des: "Brief description", price: 11 },
+      { name: "Product name", des: "Brief description", price: 14 },
+      { name: "Product name", des: "Brief description", price: 20 },
     ];
 
     // get list from local storage
