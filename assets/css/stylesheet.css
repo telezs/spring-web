@@ -1,3 +1,4 @@
+/* index */
 body {
     background-color: #c7b7a344;
 }
@@ -79,4 +80,205 @@ body {
     color: #e6ded6;
     text-decoration: none;
     display: block;
+}
+/* login */
+
+.login-img {
+    margin: 25vh 0vw;
+}
+
+
+.login-form {
+    margin: 30vh 0.5vw; 
+}
+
+.login-btn {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: #e6e6e6;
+    --bs-btn-bg: #EB9788;
+    --bs-btn-border-color: #EB9788;
+    --bs-btn-hover-color:  #e6e6e6;
+    --bs-btn-hover-bg: #c67f73;
+    --bs-btn-hover-border-color: #c67f73;
+    --bs-btn-active-bg: #eb9788;;
+    --bs-btn-active-border-color: ;
+    --bs-btn-border-width: 0.2rem;
+    --bs-btn-border-color: #EB9788;
+    --bs-btn-border-radius: 5px;
+    --bs-btn-box-shadow: #bd8c5c52 2px 2px 10px;
+
+}
+.signup-href {
+    color: #b8766b;
+    text-align: center;
+}
+
+.signin-text {
+    margin-top: 20vh;
+}
+
+.text-signin {
+    color: #b8766b;
+}
+
+/* create */
+
+#form {
+    text-align: center;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.modal-body {
+    background-color: #fff;
+    border-color: #fff;
+
+}
+
+
+.close {
+    color: #000;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+
+.theme-color{
+
+    color: #004cb9;
+}
+hr.new1 {
+    border-top: 2px dashed #fff;
+    margin: 0.4rem 0;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #004cb9;
+    border-color: #004cb9;
+    padding: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 1px;
+    font-size: 17px;
+    margin-top: 20vh;
+}
+
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #004cb9;
+    border-color: #004cb9;
+    padding: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 1px;
+    font-size: 17px;
+}
+
+#progressbar {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: #004cb9;
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 0.8rem;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #004cb9;
+}
+
+#progressbar #step1:before {
+    content: "";
+    color: #004cb9;
+    width: 20px;
+    height: 20px;
+    margin-left: 0px !important;
+}
+
+#progressbar #step2:before {
+    content: "";
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    margin-left: 32%;
+}
+
+#progressbar #step3:before {
+    content: "";
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    margin-right: 32% ; 
+}
+
+#progressbar #step4:before {
+    content: "";
+    color: rgb(151, 149, 149, 0.651);
+    width: 20px;
+    height: 20px;
+    margin-right: 0px !important;
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: rgb(151, 149, 149);
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh;
+}
+
+#progressbar li:after {
+    content: '';
+    height: 3px;
+    background: rgb(151, 149, 149, 0.651);
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 8px;
+    z-index: 1;
+}
+.progress-track{
+    padding: 0 8%;
+}
+#progressbar li:nth-child(2):after {
+    margin-right: auto;
+}
+
+#progressbar li:nth-child(1):after {
+    margin: auto;
+}
+
+#progressbar li:nth-child(3):after {
+    float: left;
+    width: 68%;
+}
+#progressbar li:nth-child(4):after {
+    margin-left: auto;
+    width: 132%;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #004cb9;
+}
+
+.model-order {
+   box-shadow: #004cb9 10px 10px ;
 }
