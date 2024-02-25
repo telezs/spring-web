@@ -1,4 +1,4 @@
-import app from "../app.js";
+import app, { firestore } from "../app.js";
 import Nav from "../components/nav.js";
 import Home from "./home.js";
 import {
@@ -123,56 +123,20 @@ export default class Checkout {
     checkout_form.noValidate = true;
 
     //full name
-    const fullName = `<div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="firstName">First name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="firstName"
-        placeholder=""
-        value=""
-        required
-      />
-      <div class="invalid-feedback">
-        Valid first name is required.
-      </div>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="lastName">Last name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="lastName"
-        placeholder=""
-        value=""
-        required
-      />
-      <div class="invalid-feedback">Valid last name is required.</div>
+    const orderName = `<div class="mb-3">
+    <label for="orderName">Order name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="orderName"
+      placeholder="Please enter your shipping order name"
+      required
+    />
+    <div class="invalid-feedback">
+      Please enter your shipping order name.
     </div>
   </div>`;
-    checkout_form.innerHTML += fullName;
-
-    //username
-    const username = `<div class="mb-3">
-    <label for="username">Username</label>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">@</span>
-      </div>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        placeholder="Username"
-        required
-      />
-      <div class="invalid-feedback" style="width: 100%">
-        Your username is required.
-      </div>
-    </div>
-  </div>`;
-    checkout_form.innerHTML += username;
+    checkout_form.innerHTML += orderName;
 
     //email
     const email = `<div class="mb-3">
@@ -279,17 +243,18 @@ export default class Checkout {
       checked
       required
     />
-    <label class="custom-control-label" for="debit">cod</label>
+    <label class="custom-control-label" for="debit">COD</label>
   </div>`;
     paymentMethods.innerHTML += debit;
 
-    const credit = `<div class="custom-control custom-radio">
+    const credit = `<div class="custom-control custom-radio" >
     <input
       id="credit"
       name="paymentMethod"
       type="radio"
       class="custom-control-input"
       required
+      disabled
     />
     <label class="custom-control-label" for="credit"
       >Credit card</label
@@ -297,8 +262,8 @@ export default class Checkout {
   </div>`;
     paymentMethods.innerHTML += credit;
 
-    const credit_form = `<div class="row">
-    <div class="col-md-6 mb-3">
+    const credit_form = `<div class="row" hidden>
+    <div class="col-md-6 mb-3" >
       <label for="cc-name">Name on card</label>
       <input
         type="text"
@@ -310,7 +275,7 @@ export default class Checkout {
       <small class="text-muted">Full name as displayed on card</small>
       <div class="invalid-feedback">Name on card is required</div>
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3" >
       <label for="cc-number">Credit card number</label>
       <input
         type="text"
@@ -324,7 +289,7 @@ export default class Checkout {
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" hidden>
     <div class="col-md-3 mb-3">
       <label for="cc-expiration">Expiration</label>
       <input
@@ -348,7 +313,7 @@ export default class Checkout {
       <div class="invalid-feedback">Security code required</div>
     </div>
   </div>`;
-    paymentMethods.innerHTML += credit_form;
+    // paymentMethods.innerHTML += credit_form;
     checkout_form.appendChild(paymentMethods);
 
     // line
@@ -364,7 +329,6 @@ export default class Checkout {
     cancel_btn.innerText = "Cancel";
     cancel_btn.style = "margin-right: 15px";
     cancel_btn.addEventListener("click", this.gotoHome.bind(this));
-    checkout_form.appendChild(cancel_btn);
 
     //submit btn
     const submit_btn = document.createElement("button");
@@ -372,10 +336,12 @@ export default class Checkout {
     submit_btn.classList.add("btn-primary");
     submit_btn.classList.add("btn-lg");
     submit_btn.classList.add("btn-block");
+    submit_btn.style = "margin-top:15px;";
     submit_btn.type = "submit";
     submit_btn.innerText = "Checkout";
     submit_btn.addEventListener("click", await this.order.bind(this));
     checkout_form.appendChild(submit_btn);
+    checkout_form.appendChild(cancel_btn);
 
     col2.appendChild(checkout_form);
     row.appendChild(col2);
@@ -388,6 +354,7 @@ export default class Checkout {
     let list = [
       { name: "Ao dai", des: "clothing", price: 110 },
       { name: "Design", des: "your design", price: this.$order.total },
+      { name: "Shipping", des: "only weekday", price: 15 },
     ];
 
     // get list from local storage
@@ -401,15 +368,32 @@ export default class Checkout {
 
   async order(e) {
     e.preventDefault();
+    // get data from html form
+    const phoneNum = document.getElementById("phone").value;
+    const address =
+      document.getElementById("country").value +
+      ", " +
+      document.getElementById("state").value +
+      ", " +
+      document.getElementById("address").value;
+    const zipCode = document.getElementById("zip").value;
+    const payment = "COD";
+    const orderName = document.getElementById("orderName").value;
     //validate form
+
     //create order on firestore
     const total = this.$itemsOrder.reduce((sum, a) => sum + a.price, 0);
-    await addDoc(collection(firestore, "order"), {
-      shipping: 5,
+    const docRef = await addDoc(collection(firestore, "orders"), {
+      orderName: orderName,
       total: total,
-      created_at: this.$order.created_at,
+      created_at: new Date(),
       created_by: this.$order.created_by,
+      phoneNum: phoneNum,
+      address: address,
+      payment: payment,
+      zipCode: zipCode,
     });
+    console.log("Document written with ID: ", docRef.id);
     // clear the storage
     localStorage.removeItem("order");
     //back home

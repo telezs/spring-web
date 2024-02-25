@@ -2,37 +2,167 @@ export default class form {
   constructor() {}
 
   initRender(container) {
+    const form_choosing = document.createElement("form");
+
+    //size--------------------
+    const formSize = document.createElement("div");
+    formSize.classList.add("form-size");
+    //title
+    // Create the form-size-label container
+    const formSizeLabel = document.createElement("div");
+    formSizeLabel.classList.add("form-size-label");
+    // Create the label element
+    const label = document.createElement("label");
+    label.htmlFor = "form-size";
+    label.textContent = "Choose your size:";
+    label.classList.add("form-label");
+    // Append the label element to the form-size-label container
+    formSizeLabel.appendChild(label);
+    // Append the form-size-label container to the formSize parent element
+    formSize.appendChild(formSizeLabel);
+
+    //s
+    const formCheck = document.createElement("div");
+    formCheck.classList.add("form-check", "form-check-inline");
+    const sizeS = document.createElement("input");
+    sizeS.type = "radio";
+    sizeS.id = "size-s";
+    sizeS.value = "s";
+    sizeS.name = "size";
+    sizeS.classList.add("form-check-input");
+
+    const sizeSLabel = document.createElement("label");
+    sizeSLabel.htmlFor = "size-s";
+    sizeSLabel.textContent = "S";
+    sizeSLabel.classList.add("form-check-label");
+
+    // Append radio input and label to form-size
+    formCheck.appendChild(sizeS);
+    formCheck.appendChild(sizeSLabel);
+    formSize.appendChild(formCheck);
+
+    // Repeat the above process for M and L sizes
+    const formCheck2 = document.createElement("div");
+    formCheck2.classList.add("form-check", "form-check-inline");
+    const sizeM = document.createElement("input");
+    sizeM.type = "radio";
+    sizeM.id = "size-m";
+    sizeM.value = "m";
+    sizeM.name = "size";
+    sizeM.classList.add("form-check-input");
+
+    const sizeMLabel = document.createElement("label");
+    sizeMLabel.htmlFor = "size-m";
+    sizeMLabel.textContent = "M";
+    sizeMLabel.classList.add("form-check-label");
+    // Append radio input and label to form-size
+    formCheck2.appendChild(sizeM);
+    formCheck2.appendChild(sizeMLabel);
+    formSize.appendChild(formCheck2);
+
+    // L
+    const formCheck3 = document.createElement("div");
+    formCheck3.classList.add("form-check", "form-check-inline");
+    const sizeL = document.createElement("input");
+    sizeL.type = "radio";
+    sizeL.id = "size-l";
+    sizeL.value = "l";
+    sizeL.name = "size";
+    sizeL.classList.add("form-check-input");
+
+    const sizeLLabel = document.createElement("label");
+    sizeLLabel.htmlFor = "size-l";
+    sizeLLabel.textContent = "L";
+    sizeLLabel.classList.add("form-check-label");
+
+    // Append radio input and label to form-size
+    formCheck3.appendChild(sizeL);
+    formCheck3.appendChild(sizeLLabel);
+    formSize.appendChild(formCheck3);
+
+    // Append formSize to your main form (replace 'form' with your actual form element)
+    form_choosing.appendChild(formSize);
+
+    //shape----------------------------
+    const formShape = document.createElement("div");
+    formShape.classList.add("form-shape");
+    //title
+    // Create the form-shape-label container
+    const formShapeLabel = document.createElement("div");
+    formShapeLabel.classList.add("form-shape-label");
+    // Create the label element
+    const labelShape = document.createElement("label");
+    labelShape.htmlFor = "form-shape";
+    labelShape.textContent = "Choose your form:";
+    labelShape.classList.add("form-label");
+    // Append the label element to the form-shape-label container
+    formShapeLabel.appendChild(labelShape);
+    // Append the form-shape-label container to the formShape parent element
+    formShape.appendChild(formShapeLabel);
+
+    //straight
+    // Create the form-check container
+    const formCheck4 = document.createElement("div");
+    formCheck4.classList.add("form-check", "form-check-inline");
+
+    // Create the neckline label and radio button
+    const necklineRound = document.createElement("input");
+    necklineRound.type = "radio";
+    necklineRound.id = "neckline-round";
+    necklineRound.value = "round";
+    necklineRound.name = "neckline";
+    necklineRound.classList.add("form-check-input");
+
+    const necklineRoundLabel = document.createElement("label");
+    necklineRoundLabel.htmlFor = "neckline-round";
+    necklineRoundLabel.textContent = "round";
+    necklineRoundLabel.classList.add("form-check-label");
+    // Append radio input and label to form-check
+    formCheck4.appendChild(necklineRound);
+    formCheck4.appendChild(necklineRoundLabel);
+    // Append form-check to the formShape parent element
+    formShape.appendChild(formCheck4);
+
+    //flared
+    // Create the form-check container
+    const formCheck5 = document.createElement("div");
+    formCheck5.classList.add("form-check", "form-check-inline");
+
+    // Create the neckline label and radio button
+    const necklineCollarred = document.createElement("input");
+    necklineCollarred.type = "radio";
+    necklineCollarred.id = "neckline-collarred";
+    necklineCollarred.value = "collared";
+    necklineCollarred.name = "neckline";
+    necklineCollarred.classList.add("form-check-input");
+
+    const necklineCollarredLabel = document.createElement("label");
+    necklineCollarredLabel.htmlFor = "neckline-collarred";
+    necklineCollarredLabel.textContent = "collarred";
+    necklineCollarredLabel.classList.add("form-check-label");
+
+    // Append radio input and label to form-check
+    formCheck5.appendChild(necklineCollarred);
+    formCheck5.appendChild(necklineCollarredLabel);
+
+    // Append form-check to the formShape parent element
+    formShape.appendChild(formCheck5);
+    // Append formSize to your main form (replace 'form' with your actual form element)
+    form_choosing.appendChild(formShape);
+
+    //neckline----------------------
+
+    // sleeves----------------------
+
+    //bottoms------------------------
+
+    //color--------------------------
+
+    //design--------------------------
+
+    container.appendChild(form_choosing);
+
     const form = `              <form class=" " action="">
-    <div class="form-size">
-        <div class="form-size-label">
-            <label for="form-size" class="form-label">Choose your size:</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="size-s" value="s"name="size">
-            <label class="form-check-label" for="inlineradio1">S</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="size-m" value="m" name="size">
-            <label class="form-check-label" for="inlineradio2">M</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="size-l" value="l" name="size">
-            <label class="form-check-label" for="inlineradio3">L</label>
-          </div>
-    </div>
-    <div class="form-shape">
-        <div class="form-shape-label">
-            <label for="form-shape" class="form-label">Choose your form:</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="form-straight" value="straight" name="shape">
-            <label class="form-check-label" for="inlineradio1">Straight</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="form-flared" value="flared" name="shape">
-            <label class="form-check-label" for="inlineradio2">Flared</label>
-          </div>
-    </div>
     <div class="form-neckline">
         <div class="form-neckline-label">
             <label for="form-neckline" class="form-label">Choose your neckline:</label>
@@ -118,8 +248,8 @@ export default class form {
             <label class="form-check-label" for="inlineradio2">bundled flowers</label>
           </div>
     </div>
-</form>`
+</form>`;
 
-  container.innerHTML += form;
+    container.innerHTML += form;
   }
 }

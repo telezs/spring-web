@@ -1,6 +1,7 @@
 import app from "../app.js";
 import Create from "../pages/create.js";
 import Gallery from "../pages/gallery.js";
+import History from "../pages/history.js";
 import Home from "../pages/home.js";
 import Login from "../pages/login.js";
 import {
@@ -58,19 +59,19 @@ export default class Nav {
     const link_home = document.createElement("a");
     link_home.classList.add("nav-link");
     link_home.innerText = "Home";
-    link_home.href = "#";
+    // link_home.href = "#";
     link_home.addEventListener("click", this.gotoHome);
 
     const link_gallery = document.createElement("a");
     link_gallery.classList.add("nav-link");
-    link_gallery.innerText = "Gallery";
-    link_gallery.href = "#";
-    link_gallery.addEventListener("click", this.gotoGallery.bind(this));
+    link_gallery.innerText = "History";
+    // link_gallery.href = "#";
+    link_gallery.addEventListener("click", this.gotoHistory.bind(this));
 
     const link_create = document.createElement("a");
     link_create.classList.add("nav-link");
     link_create.innerText = "Create";
-    link_create.href = "#";
+    // link_create.href = "#";
     link_create.addEventListener("click", this.gotoCreate);
 
     links_div.appendChild(link_home);
@@ -137,9 +138,9 @@ export default class Nav {
     const home = new Home();
     app.changeActiveScreen(home);
   }
-  gotoGallery() {
-    const gallery = new Gallery();
-    app.changeActiveScreen(gallery);
+  gotoHistory() {
+    const history = new History();
+    app.changeActiveScreen(history);
   }
   gotoCreate() {
     const create = new Create();

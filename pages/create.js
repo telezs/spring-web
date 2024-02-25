@@ -14,12 +14,6 @@ export default class Create {
   }
 
   initRender(container) {
-    // add nav in page
-    if (!document.getElementsByTagName("nav").length) {
-      const nav = new Nav();
-      nav.initRender(container);
-    }
-
     const container_fluid = document.createElement("div");
     container_fluid.id = "create";
 
@@ -105,13 +99,17 @@ export default class Create {
     clearInterval(this.$total);
 
     // get data for local storage - order
-
-    const date = new Date();
+    let total = 0;
+    if (document.getElementById("total-span").innerText != null) {
+      total = parseFloat(document.getElementById("total-span").innerText);
+    }
     const order = {
       shipping: 0,
-      total: document.getElementById("#total-span"),
-      created_at: date,
+      total: total,
       created_by: this.$currentUser.uid,
+      phoneNum: null,
+      address: null,
+      payment: null,
     };
     localStorage.setItem("order", JSON.stringify(order));
 

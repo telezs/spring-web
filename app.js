@@ -49,6 +49,18 @@ const firebaseConfig = {
   appId: "1:818746374260:web:8ae613af33e5dc057ef921",
 };
 
+// du phong
+// const firebaseConfig = {
+//   apiKey: "AIzaSyB1CAx-CyP_GQM3FusEsLVPgyhaEw95Nec",
+//   authDomain: "jsi03-blogweb-1b7b7.firebaseapp.com",
+//   databaseURL: "https://jsi03-blogweb-1b7b7-default-rtdb.asia-southeast1.firebasedatabase.app",
+//   projectId: "jsi03-blogweb-1b7b7",
+//   storageBucket: "jsi03-blogweb-1b7b7.appspot.com",
+//   messagingSenderId: "643164779534",
+//   appId: "1:643164779534:web:c17a8c18c285a9880c785f",
+//   measurementId: "G-GJR7S7GWTL"
+// };
+
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
 export const firestore = getFirestore(firebaseApp);
